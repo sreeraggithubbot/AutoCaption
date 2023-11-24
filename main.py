@@ -95,8 +95,8 @@ def get_file_details(update: pyrogram.types.Message):
                 modified_file_name = re.sub(r'\.+', '.', modified_file_name)
 
                 return obj, obj.file_id, modified_file_name
-                
-  def start_buttons(bot, update):
+
+def start_buttons(bot, update):
     bot = bot.get_me()
     buttons = [[
         pyrogram.types.InlineKeyboardButton("Updates", url="t.me/Mo_Tech_YT"),
