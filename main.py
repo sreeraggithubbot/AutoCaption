@@ -46,7 +46,7 @@ def start_command(bot, update):
                  parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
 
 @AutoCaptionBot.on_callback_query(pyrogram.filters.regex("start"))
-def strat_callback(bot, update):
+def start_callback(bot, update):
     update.message.edit(start_message.format(update.from_user.mention), reply_markup=start_buttons(bot, update.message),
                          parse_mode=pyrogram.enums.ParseMode.HTML, disable_web_page_preview=True)
 
@@ -86,7 +86,10 @@ def get_file_details(update: pyrogram.types.Message):
             obj = getattr(update, message_type)
             if obj:
                 original_file_name = obj.file_name
-                modified_file_name = original_file_name[:47] + ".mx" if len(original_file_name) >= 50 else original_file_name + ".mx"
+                if len(original_file_name) < 23:
+                    modified_file_name = original_file_name + ".mx"
+                else:
+                    modified_file_name = original_file_name[:22] + ".mx"
 
                 # Replace characters except a-z, A-Z, 0-9, .
                 modified_file_name = re.sub(r'[^a-zA-Z0-9.]', '.', modified_file_name)
@@ -116,3 +119,4 @@ print("Telegram AutoCaption V1 Bot Start")
 print("Bot Created By https://github.com/PR0FESS0R-99")
 
 AutoCaptionBot.run()
+                
