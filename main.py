@@ -97,6 +97,9 @@ def get_file_details(update: pyrogram.types.Message):
                 # Replace continuous dots with a single dot
                 modified_file_name = re.sub(r'\.+', '.', modified_file_name)
 
+                # Remove the leading dot if it exists
+                modified_file_name = modified_file_name[1:] if modified_file_name.startswith('.') else modified_file_name
+
                 return obj, obj.file_id, modified_file_name
 
 def start_buttons(bot, update):
@@ -119,4 +122,4 @@ print("Telegram AutoCaption V1 Bot Start")
 print("Bot Created By https://github.com/PR0FESS0R-99")
 
 AutoCaptionBot.run()
-                
+                                             
